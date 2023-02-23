@@ -12,23 +12,19 @@ class ProductsService
   public function getAll() {
     $stmt = $this->model->getAll();
     $num = $stmt->rowCount();
-
+    
     if ($num > 0) {
-      $products_arr = array();
+      $products_arr = [];
 
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-        $product_item = array(
-          'id' => $id,
-          'name' => $name,
-          'price' => $price
-        );
+        $product_item = new Product($id, $name, $price);
         array_push($products_arr, $product_item);
       }
 
       echo json_encode($products_arr);
     } else {
-      echo json_encode(array('message' => 'No products found'));
+      echo json_encode(['message' => 'No products found']);
     }
   }
 }

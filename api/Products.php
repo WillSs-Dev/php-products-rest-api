@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 include_once 'models/ProductsModel.php';
 include_once 'services/ProductsService.php';
 include_once 'config/DbConnection.php';
+include_once 'domain/Product.php';
 
 class ProductController{
   private $service;
