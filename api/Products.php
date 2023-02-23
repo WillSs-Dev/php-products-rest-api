@@ -13,6 +13,10 @@ class ProductController{
 
   public function __construct() {
     $this->method = $_SERVER['REQUEST_METHOD'];
+    $this->handle_request();
+  }
+
+  public function handle_request() {
     switch ($this->method) {
       case 'GET':
         $this->get();
