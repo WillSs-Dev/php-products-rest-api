@@ -9,26 +9,32 @@ class ProductModel
     $this->db = $db;
   }
 
-  public function getAll()
+  public function get_all()
   {
     $query = "SELECT P.sku, P.name, P.price,C.category_name, P.attr_value FROM products AS P INNER JOIN categories AS C GROUP BY P.id;";
+
     $stmt = $this->db->prepare($query);
     $stmt->execute();
+
     return $stmt;
   }
 
-  public function findBySku($sku)
+  public function find_by_sku($sku)
   {
     $query = "SELECT * FROM products WHERE sku = :sku";
+
     $stmt = $this->db->prepare($query);
     $stmt->execute(['sku' => $sku]);
+
     return $stmt;
   }
 
   public function create($product)
   {
     $query = "INSERT IGNORE INTO products (sku, name, price, category_id, attr_value) VALUES (:sku, :name, :price, :category_id, :attr_value)";
+
     $stmt = $this->db->prepare($query);
+    
     $stmt->execute([
       'sku' => $product->sku,
       'name' => $product->name,

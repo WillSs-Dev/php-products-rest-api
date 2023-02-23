@@ -32,7 +32,7 @@ class ProductController
 
   public function get()
   {
-    $result = $this->service->getAll();
+    $result = $this->service->get_all();
     echo $result;
   }
 

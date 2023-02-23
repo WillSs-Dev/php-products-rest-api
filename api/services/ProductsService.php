@@ -10,9 +10,9 @@ class ProductsService
     $this->model = new ProductModel($db->connect());
   }
 
-  public function getAll()
+  public function get_all()
   {
-    $stmt = $this->model->getAll();
+    $stmt = $this->model->get_all();
     $num = $stmt->rowCount();
 
     if ($num > 0) {
@@ -22,9 +22,9 @@ class ProductsService
     }
   }
 
-  private function skuAlreadyInUse($sku)
+  private function sku_already_in_use($sku)
   {
-    $stmt = $this->model->findBySku($sku);
+    $stmt = $this->model->find_by_sku($sku);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result ? true : false;
   }
@@ -33,7 +33,7 @@ class ProductsService
   {
     $product = json_decode($body);
 
-    if ($this->skuAlreadyInUse($product->sku)) {
+    if ($this->sku_already_in_use($product->sku)) {
       echo json_encode(['message' => 'SKU already in use']);
       return;
     }
@@ -47,7 +47,7 @@ class ProductsService
     $product->category_id = $category_id[$product->category];
 
     $this->model->create($product);
-
+    
     echo json_encode(['message' => 'Product created']);
   }
 }
