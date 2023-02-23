@@ -14,7 +14,7 @@ class ProductsService
     $num = $stmt->rowCount();
     
     if ($num > 0) {
-      echo(json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)));
+      echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     } else {
       echo json_encode(['message' => 'No products found']);
     }
