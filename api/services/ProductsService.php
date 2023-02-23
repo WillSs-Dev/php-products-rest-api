@@ -14,19 +14,9 @@ class ProductsService
     $num = $stmt->rowCount();
     
     if ($num > 0) {
-      $products_arr = [];
-
-      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        extract($row);
-        $product_item = new Product($id, $name, $price);
-        array_push($products_arr, $product_item);
-      }
-
-      echo json_encode($products_arr);
+      echo(json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)));
     } else {
       echo json_encode(['message' => 'No products found']);
     }
   }
 }
-
-?>
