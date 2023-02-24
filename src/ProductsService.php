@@ -7,7 +7,7 @@ class ProductsService
   public function __construct()
   {
     $db = new DbConnection();
-    $this->model = new ProductModel($db->connect());
+    $this->model = new ProductsModel($db->connect());
   }
 
   private function handle_http_status($status_code)

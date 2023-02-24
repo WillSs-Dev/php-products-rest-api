@@ -1,13 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
-header('Content-Type: application/json');
 
-include_once 'models/ProductsModel.php';
-include_once 'services/ProductsService.php';
-include_once 'config/DbConnection.php';
-
-class ProductController
+class ProductsController
 {
   private $service;
   private $method;
@@ -42,5 +35,3 @@ class ProductController
     echo $result;
   }
 }
-
-new ProductController();
