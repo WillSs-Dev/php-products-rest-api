@@ -4,9 +4,10 @@ class ProductsModel
 {
   private $db;
 
-  public function __construct($db)
+  public function __construct()
   {
-    $this->db = $db;
+    $db = new DbConnection();
+    $this->db = $db->connect();
   }
 
   public function get_all()
