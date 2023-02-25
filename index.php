@@ -36,6 +36,9 @@ class AutoLoad
       case '/products':
         new ProductsController();
         break;
+      case '/':
+        new ProductsController();
+        break;
     }
   }
 }
