@@ -21,16 +21,12 @@ class AutoLoad
 
   public function load_environtment()
   {
-    if (!file_exists('.env')) {
-      echo 'Environment file not found';
-      var_dump(getenv("MYSQLHOST"));
-      var_dump(getenv("MYSLQUSER"));
-    }
+    if (file_exists('.env')) {
+      $lines = file('.env');
 
-    $lines = file('.env');
-
-    foreach ($lines as $line) {
-      putenv(trim($line));
+      foreach ($lines as $line) {
+        putenv(trim($line));
+      }
     }
   }
 
