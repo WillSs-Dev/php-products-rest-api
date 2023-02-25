@@ -12,7 +12,7 @@ class ProductsModel
 
   public function get_all()
   {
-    $query = "SELECT P.sku, P.name, P.price,C.category_name, P.attr_value FROM products AS P INNER JOIN categories AS C GROUP BY P.id;";
+    $query = "SELECT P.sku, P.name, P.price,C.category_name, P.attr_value FROM products AS P INNER JOIN categories AS C WHERE P.category_id = C.id GROUP BY P.id;";
 
     $stmt = $this->db->prepare($query);
     $stmt->execute();

@@ -46,13 +46,13 @@ class ProductsService
       return;
     }
 
-    $category_id = [
+    $category_ids = [
       'furniture' => 1,
       'dvd' => 2,
       'book' => 3,
     ];
 
-    $product->category_id = $category_id[$product->category];
+    $product->category_id = $category_ids[$product->category];
 
     $this->model->create($product);
     $this->handle_http_status(201);
