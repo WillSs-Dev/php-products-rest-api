@@ -21,8 +21,11 @@ class AutoLoad
 
   public function load_environtment()
   {
-    getenv("MYSQLHOST");
-    getenv("MYSQLUSER");
+    if (!file_exists('.env')) {
+      echo 'Environment file not found';
+      var_dump(getenv("MYSQLHOST"));
+      var_dump(getenv("MYSLQUSER"));
+    }
 
     $lines = file('.env');
 
