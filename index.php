@@ -21,8 +21,11 @@ class AutoLoad
 
   public function load_environtment()
   {
+    getenv("MYSQLHOST");
+    getenv("MYSQLUSER");
+    
     $lines = file('.env');
-
+    
     foreach ($lines as $line) {
       putenv(trim($line));
     }
