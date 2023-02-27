@@ -22,7 +22,23 @@ class ProductsService
 
     if ($num > 0) {
       $this->handle_http_status(200);
-      echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+      $response = [];
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        switch ($category_name) {
+          case 'furniture':
+            $product = new Furniture($sku, $name, $price, $category_name, $attr_value);
+            break;
+          case 'dvd':
+            $product = new Dvd($sku, $name, $price, $category_name, $attr_value);
+            break;
+          case 'book':
+            $product = new Book($sku, $name, $price, $category_name, $attr_value);
+            break;
+        }
+        array_push($response, $product);
+      }
+      echo json_encode($response);
     } else {
       $this->handle_http_status(404);
       echo json_encode(['message' => 'No products found']);
@@ -38,23 +54,15 @@ class ProductsService
 
   public function create($body)
   {
-    $product = json_decode($body);
+    $productRequest = new ProductRequest(json_decode($body));
 
-    if ($this->sku_already_in_use($product->sku)) {
+    if ($this->sku_already_in_use($productRequest->sku)) {
       $this->handle_http_status(400);
       echo json_encode(['message' => 'SKU already in use']);
       return;
     }
 
-    $category_ids = [
-      'furniture' => 1,
-      'dvd' => 2,
-      'book' => 3,
-    ];
-
-    $product->category_id = $category_ids[$product->category];
-
-    $this->model->create($product);
+    $this->model->create($productRequest);
     $this->handle_http_status(201);
     echo json_encode(['message' => 'Product created']);
   }
