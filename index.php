@@ -6,7 +6,6 @@ header('Content-Type: application/json; charset=UTF-8');
 
 class AutoLoad
 {
-  private $endpoint;
 
   public function __construct()
   {
@@ -14,9 +13,8 @@ class AutoLoad
       include 'src/' . $class_name . '.php';
     });
 
-    $this->endpoint = $_SERVER["REQUEST_URI"];
     $this->load_environtment();
-    $this->get_controller();
+    new ProductsController();
   }
 
   public function load_environtment()
@@ -27,18 +25,6 @@ class AutoLoad
       foreach ($lines as $line) {
         putenv(trim($line));
       }
-    }
-  }
-
-  public function get_controller()
-  {
-    switch ($this->endpoint) {
-      case '/products':
-        new ProductsController();
-        break;
-      case '/':
-        new ProductsController();
-        break;
     }
   }
 }
