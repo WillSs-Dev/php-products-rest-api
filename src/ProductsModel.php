@@ -32,7 +32,7 @@ class ProductsModel
 
   public function create($product)
   {
-    $query = "INSERT IGNORE INTO products (sku, name, price, category_id, attr_value) VALUES (:sku, :name, :price, :category_id, :attr_value)";
+    $query = "INSERT INTO products (sku, name, price, category_id, attr_value) VALUES (:sku, :name, :price, :category_id, :attr_value)";
 
     $stmt = $this->db->prepare($query);
     
