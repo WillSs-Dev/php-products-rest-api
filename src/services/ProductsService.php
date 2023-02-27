@@ -41,6 +41,7 @@ class ProductsService
       echo json_encode($response);
     } else {
       $this->handle_http_status(404);
+      echo $num;
       echo json_encode(['message' => 'No products found']);
     }
   }

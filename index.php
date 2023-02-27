@@ -10,7 +10,20 @@ class AutoLoad
   public function __construct()
   {
     spl_autoload_register(function ($class_name) {
-      include 'src/' . $class_name . '.php';
+      $sources = [
+        'src/' . $class_name . '.php',
+        'src/domain/' . $class_name . '.php',
+        'src/controllers/' . $class_name . '.php',
+        'src/services/' . $class_name . '.php',
+        'src/models/' . $class_name . '.php',
+        'src/db/' . $class_name . '.php',
+      ];
+
+      foreach ($sources as $source) {
+        if (file_exists($source)) {
+          require_once $source;
+        }
+      }
     });
 
     $this->load_environtment();
