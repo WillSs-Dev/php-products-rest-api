@@ -30,7 +30,7 @@ class ProductsService
             $product = new Furniture($sku, $name, $price, $category_name, $attr_value);
             break;
           case 'dvd':
-            $product = new Dvd($sku, $name, $price, $category_name, $attr_value);
+            $product = new DVD($sku, $name, $price, $category_name, $attr_value);
             break;
           case 'book':
             $product = new Book($sku, $name, $price, $category_name, $attr_value);
@@ -41,7 +41,6 @@ class ProductsService
       echo json_encode($response);
     } else {
       $this->handle_http_status(404);
-      echo $num;
       echo json_encode(['message' => 'No products found']);
     }
   }
