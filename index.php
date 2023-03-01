@@ -27,7 +27,7 @@ class AutoLoad
     });
 
     $this->load_environtment();
-    new ProductController();
+    new ProductsController();
   }
 
   public function load_environtment()
