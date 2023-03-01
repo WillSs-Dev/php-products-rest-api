@@ -27,9 +27,8 @@ class AutoLoad
     });
 
     $this->load_environtment();
-    // new ProductsController();
     if ($_SERVER['REQUEST_URI'] === '/products') {
-      echo 'AAAAAAAAAAAAA';
+      new ProductController();
     }
   }
 
