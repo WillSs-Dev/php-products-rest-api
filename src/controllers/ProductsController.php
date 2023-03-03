@@ -20,6 +20,9 @@ class ProductsController
         break;
       case 'POST':
         $this->post(file_get_contents('php://input'));
+      case 'DELETE':
+        $this->delete(file_get_contents('php://input'));
+        break;
     }
   }
 
@@ -32,6 +35,12 @@ class ProductsController
   public function post($body)
   {
     $result = $this->service->create($body);
+    echo $result;
+  }
+
+  public function delete($body)
+  {
+    $result = $this->service->mass_delete($body);
     echo $result;
   }
 }

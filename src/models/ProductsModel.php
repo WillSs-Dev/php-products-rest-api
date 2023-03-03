@@ -44,4 +44,12 @@ class ProductsModel
       'attr_value' => $product->attr_value,
     ]);
   }
+
+  public function delete($sku)
+  {
+    $query = "DELETE FROM products WHERE sku = :sku";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute(['sku' => $sku]);
+  }
 }

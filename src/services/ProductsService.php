@@ -66,4 +66,16 @@ class ProductsService
     $this->handle_http_status(201);
     echo json_encode(['message' => 'Product created']);
   }
+
+  public function mass_delete($body)
+  {
+    $skus = json_decode($body)->skus;
+
+    foreach ($skus as $sku) {
+      $this->model->delete($sku);
+    }
+
+    $this->handle_http_status(200);
+    echo json_encode(['message' => 'Products deleted']);
+  }
 }
