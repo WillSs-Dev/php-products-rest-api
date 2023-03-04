@@ -20,6 +20,7 @@ class ProductsController
         break;
       case 'POST':
         $this->post(file_get_contents('php://input'));
+        break;
       case 'DELETE':
         $this->delete(file_get_contents('php://input'));
         break;
